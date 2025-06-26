@@ -3,6 +3,7 @@ import express from "express";
 import { PORT } from "./config/env";
 import { errorMiddleware } from "./middlewares/error.middlwares";
 import sampleRouter from "./routes/sample.router";
+import blogRouter from "./routes/blog.router";
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 
 // routes
 app.use("/samples", sampleRouter);
+app.use("/blogs", blogRouter);
 
 // error
 app.use(errorMiddleware);
