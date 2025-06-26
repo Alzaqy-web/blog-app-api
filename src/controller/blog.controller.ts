@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { createBlogService } from "../services/blog/create-blog.service";
 import { getBlogsService } from "../services/blog/get-blogs.service";
+import { getBlogtBySlugService } from "../services/blog/get-blog-by-slug.service";
 
 export const CreateBlogController = async (
   req: Request,
@@ -30,6 +31,20 @@ export const getBlogsController = async (
     };
 
     const result = await getBlogsService(query);
+    res.status(200).send(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getBlogBySlugController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const slug = req.params.slug;
+    const result = await getBlogtBySlugService(slug);
     res.status(200).send(result);
   } catch (error) {
     next(error);
